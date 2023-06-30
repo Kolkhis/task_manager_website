@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+Hello, {{ user.username | default:'Guest' }}!
+
+<br />
+
+{% if user.is_authenticated %}
+<p>Welcome Back!</p>
+{% else %}
+<p>Welcome!</p>
+{% endif %}
+
+{% endblock %}
+
