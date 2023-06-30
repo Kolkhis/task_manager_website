@@ -16,11 +16,10 @@ A site that will allow the user to create tasks & notes
 
 
 
-
-
 ## Possible front-end frameworks:
 
 * Bootstrap
+* Suggestions? I hate front-end :(
 
 
 ## Database:
@@ -52,7 +51,7 @@ settings.py:
 * Apache with mod_wsgi (docs recommended)
 
 
-## Django Cmds:
+## Useful Django Cmds:
 
     * django-admin startproject <project_name>  <- Initialize a django project
     * python manage.py runserver                <- Start live server
@@ -65,7 +64,7 @@ settings.py:
 ---------------------
 
 
-## Notes
+## Notes for Personal Use
 
 ### URL Paths
 Make a URL by modifying urls.py, adding to the `urlpatterns` list.
@@ -172,7 +171,7 @@ User Registers -> send() -> Email User
 #### Django Rest Framework (For backend-only)
 
 terminal
-```sh
+```shell
 pip install djangorestframework
 ```
 
@@ -197,7 +196,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-# App Filetree Structure
+# Example App Filetree Structure
 
 root
 │
@@ -241,7 +240,7 @@ root
 
 
 
-DB Schema:
+Planned DB Schema:
 
      User
       |
@@ -253,36 +252,20 @@ DB Schema:
 
 
 
+* [ ] Add `Date/time added` fields
+* [ ] Add `Last Updated`/`Edited` time fields? 
 
-> Add `Date/time added` fields
-> Add `Last Updated`/`Edited` time fields? 
-
+Implementation(?):
+```python
 from django.utils import timezone
 
 date_created = models.DateTimeField(default=timezone.now)
+```
 
-
-once DB tables updated, run `python manage.py makemigrations; python manage.py migrate`
-To view SQL code when migrations are being made: 
+Once DB tables updated, run `python manage.py makemigrations; python manage.py migrate`
+To view SQL code when migrations are being made (optional, if curious): 
     * get migration file (users/migrations/0001_initial.py or smth similar)
-    * python manage.py sqlmigrate blog 0001     Will stdout the SQL query that will be made
+    * `python manage.py sqlmigrate blog 0001`  -  Will stdout the SQL query that will be made
 
-
-
-p5=db.ops
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+` p5=db.ops ` (what is this lol)
 
