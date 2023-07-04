@@ -1,39 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    id = models.UUIDField(primary_key=True)
+    id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
+    date_created = models.DateTimeField(default=timezone.now)
+    # TODO: Create an option for user to upload a profile picture
     
-
-class Task(models.Model):
-    id = models.UUIDField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
-    subtitle = models.CharField(max_length=100)
-    body = models.CharField(max_length=1000)
-
-
-class SubTask(models.Model):
-    id = models.UUIDField(primary_key=True)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=25)
-    subtitle = models.CharField(max_length=50)
-    body = models.CharField(max_length=1000)
-
-
-class Comment(models.Model):
-    id = models.UUIDField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    subtask = models.ForeignKey(SubTask, on_delete=models.CASCADE)
-    title = models.CharField(max_length=40)
-    body = models.CharField(max_length=1000)
 
 

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2> {{ task.title }} </h2>
+<h3> {{ task.subtitle }} </h3>
+
+<p> {{ task.body }} </p>
+
+<h4> Sub-tasks </h4>
+{% for subtask in task.subtasks.all %}
+<h5> {{ subtask.title }} </h5>
+<h6> {{ subtask.subtitle }} </h6>
+<p> {{ subtask.body }} </p>
+{% endfor %}
+
+<a href="{% url 'add_subtask' task_id=task.id %}">Add Sub-task</a><br />
+
+
+{% endblock %}
+
+
+
+

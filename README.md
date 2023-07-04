@@ -9,9 +9,14 @@ A site that will allow the user to create tasks & notes
 
     * [x] Get Django up and running
     * [x] Create a landing page
-    * [ ] Create database models
-        * [ ] Add auto datetime to tasks/sub/comments 
+    * [x] Create separate app `tasks` (separate from users)
+    * [x] Create database models
+        * [x] Add auto datetime to tasks/sub/comments 
         * [ ] Add magic methods for all models ( i.e., __str__, __repr__ )
+    * [ ] Create a Form for UserProfile to add some personal info
+        * [ ] Add a way for the User to upload a profile picture
+    * [ ] Create a route in /users/ to display the user profile
+    * [ ] Add links for comments to Tasks/Subtasks, complete `add_comment` view for comment processing.
 
 
 
@@ -66,6 +71,12 @@ settings.py:
 
 ## Notes for Personal Use
 
+### Django DB Migrations workflow
+
+#### Editing Models
+* Create app: `python manage.py startapp app_name`
+* Make models for the app in `models.py`, add ForeignKeys for `User`
+
 ### URL Paths
 Make a URL by modifying urls.py, adding to the `urlpatterns` list.
 
@@ -81,6 +92,13 @@ Make a URL by modifying urls.py, adding to the `urlpatterns` list.
 ### DB and ORM
 
 Models: class-based representations of DB objects.
+
+
+Can scope into relationships with `.exists`:
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks')
+
+    if user.tasks.exists:
+
 
 #### Defining a model
 
