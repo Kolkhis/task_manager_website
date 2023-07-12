@@ -13,6 +13,7 @@ A site that will allow the user to create tasks & notes
     * [x] Create database models
         * [x] Add auto datetime to tasks/sub/comments 
         * [ ] Add magic methods for all models ( i.e., __str__, __repr__ )
+    * [ ] Create a User Registration Form
     * [ ] Create a Form for UserProfile to add some personal info
         * [ ] Add a way for the User to upload a profile picture
     * [ ] Create a route in /users/ to display the user profile
@@ -24,6 +25,8 @@ A site that will allow the user to create tasks & notes
 ## Possible front-end frameworks:
 
 * Bootstrap
+* Tailwind
+* Pico
 * Suggestions? I hate front-end :(
 
 

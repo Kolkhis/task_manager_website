@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block header %}Edit Profile{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Confirm" enctype="multipart/form-data">
+        </form>
+    {% else %}
+        <p>You must be logged in to edit your profile!</p>
+    {% endif %}
+{% endblock %}

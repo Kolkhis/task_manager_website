@@ -1,29 +1,105 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'css/pico/pico.min.css' %}">
+	<title>{% block title %}Task Manager{% endblock %}</title>
+    </head>
+
+<body>
 
 {% block navbar %}
 
+<nav class="container-fluid">
+  <ul>
+    <li><strong> Task Manager</strong></li>
+  </ul>
+  <ul>
 {% if user.is_authenticated %}
-<a href="{% url 'logout' %}">Log Out</a>
-<a href="{% url 'password_change' %}">Change Password</a>
+    <!-- TODO: Add a profile link -->
+    <li> <a href="{% url 'profile' user_name=user.username %}">My Profile</a></li>
+    <li> <a href="{% url 'dashboard' %}">Overview</a></li>
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'password_change' %}">Change Password</a></li>
+    <li><a href="{% url 'logout' %}">Log Out</a></li>
 {% else %}
-<a href="{% url 'login' %}">Log In</a>
+    <li><a href="{% url 'login' %}">Log In</a></li>
+    <li><a href="{% url 'register' %}">Sign Up</a></li>
 {% endif %}
 
+    <!-- <li><a href="#" role="button">Button</a></li> -->
+  </ul>
+</nav>
+
 {% endblock %}
 
+<!-- Main --> 
+<main class="container">
 
-<h1>Tasks Base</h1>
 
+
+<section>
+<header>
+    <h1>
+{% block header %}
+Tasks
+{% endblock %}
+</h1>
+</header>
+</section>
+
+
+{% block errors %}
+
+	{% if form.errors %}
+	    <div class="alert">
+		<ul>
+	    {% for field in form %}
+		{% for error in field.errors %}
+		    <li><p>{{ error }}</p></li>
+		{% endfor %}
+		</ul>
+	    </div>
+	    {% endfor %}
+
+	    <div class="alert">
+		<ul>
+		{% for error in form.non_field_errors %}
+		    <li><p>{{ error | escape }}</p></li>
+		{% endfor %}
+		</ul>
+	    </div>
+	{% endif %}
+
+
+	{% if messages %}
+	<div class="messages">
+	    <ul>
+	    {% for message in messages %}
+		<li><p>{{ message }}</p></li>
+	    {% endfor %}
+	    </ul>
+	</div>
+	{% endif %}
+
+{% endblock %}
 
 {% block content %}
-
-
 {% endblock %}
 
+</main>
 
+<footer class="container">
+<nav>
 {% block footer %}
-<a href="{% url 'overview' %}">Back to Task Overview</a>
+<a href="{% url 'overview' %}">Task Overview</a>
 <br />
-<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+<a href="{% url 'dashboard' %}">Dashboard</a>
 {% endblock %}
-
-
+</nav>
+</footer>
+</body>
+</html>
