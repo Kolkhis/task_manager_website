@@ -6,8 +6,6 @@ from . import forms
 from . import models
 
 
-# Create your views here.
-
 def dashboard(request):
     return render(request, "users/dashboard.html")
 
@@ -27,7 +25,6 @@ def register(request):
         else:
             messages.error(request, "There was an error while processing your request.")
             return render(request, "registration/register.html", context={"form": form})
-
     form = forms.RegistrationForm()
     return render(request, "registration/register.html", context={"form": form})
 

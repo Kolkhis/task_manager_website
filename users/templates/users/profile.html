@@ -3,7 +3,7 @@
 {% block content %}
     <p>Profile image:</p>
     <img src="{{ profile.profile_image.url }}" alt="profile pic">
-	<p>DEBUG: Profile path: {{ profile.profile_image.url }}</p>
+    <p>DEBUG: Profile path: {{ profile.profile_image.url }}</p>
     {% autoescape on %}
         <h4>{{ profile.first_name }} {{ profile.last_name }}</h4>
         <p>Email: {{ profile.public_email }}</p>
