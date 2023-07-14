@@ -2,7 +2,8 @@
 
 # Task Manager Website
 
-A site that will allow the user to create tasks & notes
+A site that will allow the user to create tasks & notes (think Jira, but
+sh\*ttier)
 
 
 ## To-Do:
@@ -12,23 +13,28 @@ A site that will allow the user to create tasks & notes
     * [x] Create separate app `tasks` (separate from users)
     * [x] Create database models
         * [x] Add auto datetime to tasks/sub/comments 
-        * [ ] Add magic methods for all models ( i.e., __str__, __repr__ )
-    * [ ] Create a User Registration Form
-    * [ ] Create a Form for UserProfile to add some personal info
-        * [ ] Add a way for the User to upload a profile picture
-    * [ ] Create a route in /users/ to display the user profile
-    * [ ] Add links for comments to Tasks/Subtasks, complete `add_comment` view for comment processing.
+        * [x] Add magic methods for all models ( i.e., __str__, __repr__ )
+    * [x] Create a User Registration Form
+    * [x] Create a Form for UserProfile to add some personal info
+        * [x] Add a way for the User to upload a profile picture
+    * [x] Create a route in /users/ to display the user profile
+    * [x] Add links for comments to Tasks/Subtasks, complete `add_comment` view for comment processing.
+    * [x] Add "Completed" attribute display
+    * [x] Add delete methods for tasks, subtasks, comments
+    * [ ] Add delete methods for user profile fields
+
+
+## BIG TO-DO:
+
+    * [ ] Create a "Teams" feature that will allow users to collaborate on Tasks.
 
 
 
-
-## Possible front-end frameworks:
+## Possible front-end frameworks: (Pico won)
 
 * Bootstrap
 * Tailwind
 * Pico
-* Suggestions? I hate front-end :(
-
 
 ## Database:
 

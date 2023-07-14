@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block heading %}Edit a Task{% endblock %}
+
+{% block content %}
+{% if complete %}
+<h2>Task Successfully Created!</h2>
+{% endif %}
+<form method="POST">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit", value="Submit">
+</form>
+
+{% endblock %}
+

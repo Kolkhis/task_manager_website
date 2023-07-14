@@ -14,10 +14,10 @@ class Task(models.Model):
     completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"Task {self.id}: Author={self.user.name}, {self.title=}, {self.subtitle=}"
+        return f"Task {self.id}: Author={self.user.username}, {self.title=}, {self.subtitle=}"
 
     def __repr__(self):
-        return f"<Task {self.id}> owned by {self.user.name}"
+        return f"<Task {self.id}> owned by {self.user.username}"
 
 
 
@@ -32,25 +32,29 @@ class SubTask(models.Model):
     completed = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"SubTask {self.id}: Author={self.user.name}, {self.title=}, {self.subtitle=} "
+        return f"SubTask {self.id}: Author={self.user.username}, {self.title=}, {self.subtitle=} "
 
     def __repr__(self):
-        return f"<SubTask {self.id}> owned by {self.user.name}"
+        return f"<SubTask {self.id}> owned by {self.user.username}"
 
 
 class Comment(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='comments')
-    subtask = models.ForeignKey(SubTask, on_delete=models.CASCADE)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE,
+                             related_name='comments', null=True,
+                             default=None, blank=True)
+    subtask = models.ForeignKey(SubTask, on_delete=models.CASCADE,
+                             related_name='comments', null=True,
+                             default=None, blank=True)
     title = models.CharField(max_length=40)
     body = models.CharField(max_length=1000)
     date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f"Comment {self.id}: Author={self.user.name}, {self.title=}"
+        return f"Comment {self.id}: Author={self.user.username}, {self.title=}"
 
     def __repr__(self):
-        return f"<Comment {self.id}> owned by {self.user.name}"
+        return f"<Comment {self.id}> owned by {self.user.username}"
 
 

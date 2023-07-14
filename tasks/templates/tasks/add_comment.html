@@ -1,20 +1,13 @@
 {% extends 'base.html' %}
-
-
 {% block heading %}Add a Comment{% endblock %}
-
 {% block content %}
-
-
-{% csrf_token %}
-<form method="POST">
-{% form.as_p %}
-<input type="submit" value="Submit">
-</form>
-
-
+{% if task %}
+<form action="{% url 'add_comment' id=task.id task=True %}" method="POST">
+{% elif not task %}
+<form action="{% url 'add_comment' id=subtask.id task=False %}" method="POST">
+{% endif %}
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}
-
-
-
-

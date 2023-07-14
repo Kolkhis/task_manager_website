@@ -1,27 +1,51 @@
 {% extends 'base.html' %}
-
-
 {% block heading %}Task View{% endblock %}
-
 {% block content %}
-
-<h2> {{ task.title }} </h2>
-<h3> {{ task.subtitle }} </h3>
-
-<p> {{ task.body }} </p>
-
-<h4> Sub-tasks </h4>
-{% for subtask in task.subtasks.all %}
-<h5> {{ subtask.title }} </h5>
-<h6> {{ subtask.subtitle }} </h6>
-<p> {{ subtask.body }} </p>
-{% endfor %}
-
-<a href="{% url 'add_subtask' task_id=task.id %}">Add Sub-task</a><br />
-
-
+    <article id="article">
+        <hgroup>
+            <h2>{{ task.title }}</h2>
+            <h3>{{ task.subtitle }}</h3>
+			{% if task.completed %}
+			<h4> - Complete!</h4>
+			{% else %}
+			<h4> - Incomplete </h4>
+			{% endif %}
+        </hgroup>
+        <p>{{ task.body }}</p>
+        <details>
+            <summary>Manage Task</summary>
+                <a href="{% url 'edit_task' task_id=task.id %}" role="button">Edit Task</a>
+                <a href="{% url 'delete_task' task_id=task.id %}" role="button">Delete Task</a>
+        </details>
+        {% for comment in task.comments.all %}
+            <article id="article">
+                <p>{{ comment.title }}</p>
+                <p>{{ comment.body }}</p>
+					<a href="{% url 'delete_comment' id=comment.id %}" style="color:red;"
+						title="Delete Comment">❌</a>
+            </article>
+        {% endfor %}
+        <a href="{% url 'add_comment' id=task.id task=True %}">Add Comment</a>
+    </article>
+    <h4>Sub-tasks</h4>
+    <article id="article">
+        {% for subtask in task.subtasks.all %}
+            <hgroup>
+                <h5>{{ subtask.title }}</h5>
+                <h6>{{ subtask.subtitle }}</h6>
+            </hgroup>
+            <p>{{ subtask.body }}</p>
+                <a href="{% url 'delete_subtask' id=subtask.id %}" role="button">Delete Subtask</a>
+            {% for comment in subtask.comments.all %}
+                <article id="article">
+                    <p>{{ comment.title }}</p>
+                    <p>{{ comment.body }}</p>
+					<a href="{% url 'delete_comment' id=comment.id %}" role="button">Delete Comment</a>
+                </article>
+            {% endfor %}
+            <a href={% url 'add_comment' id=subtask.id task=False %}>Add Comment</a>
+        </article>
+    {% endfor %}
+    <a href="{% url 'add_subtask' task_id=task.id %}">Add Sub-task</a>
+    <br />
 {% endblock %}
-
-
-
-
