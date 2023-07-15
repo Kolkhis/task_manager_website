@@ -8,6 +8,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def dashboard(request):
     return render(request, "users/dashboard.html")
 
@@ -43,13 +44,15 @@ def edit_profile(request):
             user_profile.occupation = form.cleaned_data.get("occupation")
             user_profile.public_email = form.cleaned_data.get("public_email")
             user_profile.profile_image = form.cleaned_data.get("profile_image")
-# Comment out for now - if user wants a blank field, let them have it!
-#             user_profile.first_name = form.cleaned_data.get("first_name", user_profile.first_name)
-#             user_profile.last_name = form.cleaned_data.get("last_name", user_profile.last_name)
-#             user_profile.occupation = form.cleaned_data.get("occupation", user_profile.occupation)
-#             user_profile.public_email = form.cleaned_data.get("public_email", user_profile.public_email)
-#             user_profile.profile_image = form.cleaned_data.get("profile_image", user_profile.profile_image)
-            logger.warning(f'PROFILE IMAGE FIELD RESULT: {form.cleaned_data.get("profile_image")}')
+            # Comment out for now - if user wants a blank field, let them have it!
+            # user_profile.first_name = form.cleaned_data.get("first_name", user_profile.first_name)
+            # user_profile.last_name = form.cleaned_data.get("last_name", user_profile.last_name)
+            # user_profile.occupation = form.cleaned_data.get("occupation", user_profile.occupation)
+            # user_profile.public_email = form.cleaned_data.get("public_email", user_profile.public_email)
+            # user_profile.profile_image = form.cleaned_data.get("profile_image", user_profile.profile_image)
+            logger.warning(
+                f'PROFILE IMAGE FIELD RESULT: {form.cleaned_data.get("profile_image")}'
+            )
             user_profile.save()
             return redirect(f"../profile/{request.user.username}")
         messages.add_message(request, message="Form was not valid!", level="ERROR")
