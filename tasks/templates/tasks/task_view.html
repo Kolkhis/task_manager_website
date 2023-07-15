@@ -21,8 +21,11 @@
             <article id="article">
                 <p>{{ comment.title }}</p>
                 <p>{{ comment.body }}</p>
-					<a href="{% url 'delete_comment' id=comment.id %}" style="color:red;"
+				{% if comment.user == user %}
+					<a href="{% url 'delete_comment' id=comment.id %}" style="color:red;
+																	   text-decoration: inherit;"
 						title="Delete Comment">❌</a>
+				{% endif %}
             </article>
         {% endfor %}
         <a href="{% url 'add_comment' id=task.id task=True %}">Add Comment</a>
@@ -33,7 +36,7 @@
             <hgroup>
                 <h5>{{ subtask.title }}</h5>
                 <h6>{{ subtask.subtitle }}</h6>
-            </hgroup>
+            </hgroup
             <p>{{ subtask.body }}</p>
                 <a href="{% url 'delete_subtask' id=subtask.id %}" role="button">Delete Subtask</a>
             {% for comment in subtask.comments.all %}

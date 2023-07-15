@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
+{% block header %}User Dashboard{% endblock %}
 {% block content %}
     <main class="container">
-        Hello, {{ user.username | default:'Guest' }}!
         <br />
+<article>
         {% if user.is_authenticated %}
+		<p>Hello, {{ user.username | default:'Guest' }}!</p>
             <p>Welcome Back!</p>
+			<a href="{% url 'password_change' %}">Change Password</a>
         {% else %}
             <p>Welcome!</p>
         {% endif %}
+</article>
     </main>
 {% endblock %}
 {% block footer %}

@@ -1,12 +1,17 @@
 {% extends 'base.html' %}
 {% block header %}{{ username }}'s Profile{% endblock %}
 {% block content %}
-    <p>Profile image:</p>
+<article class="container-fluid">
+	{% if profile.profile_image %}
     <img src="{{ profile.profile_image.url }}" alt="profile pic">
-    <p>DEBUG: Profile path: {{ profile.profile_image.url }}</p>
+	{% endif %}
     {% autoescape on %}
         <h4>{{ profile.first_name }} {{ profile.last_name }}</h4>
         <p>Email: {{ profile.public_email }}</p>
         <p>Occupation: {{ profile.occupation }}</p>
     {% endautoescape %}
+</article>
+{% if profile.user == user %}
+<a href="{% url 'edit_profile' %}">Edit Profile</a>
+{% endif %}
 {% endblock %}

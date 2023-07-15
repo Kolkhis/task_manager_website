@@ -4,7 +4,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from . import forms
 from . import models
+import logging
 
+logger = logging.getLogger(__name__)
 
 def dashboard(request):
     return render(request, "users/dashboard.html")
@@ -34,18 +36,26 @@ def edit_profile(request):
         form = forms.EditProfileForm(request.POST, request.FILES)
         if form.is_valid():
             user_profile = request.user.profile
+            # user_profile = models.UserProfile.objects.filter(id=request.user.id).first()
             # user_profile = forms.EditProfileForm(request.POST, request.FILES)
             user_profile.first_name = form.cleaned_data.get("first_name")
             user_profile.last_name = form.cleaned_data.get("last_name")
             user_profile.occupation = form.cleaned_data.get("occupation")
             user_profile.public_email = form.cleaned_data.get("public_email")
-            # user_profile.profile_image = request.FILES.get('profile_image')
             user_profile.profile_image = form.cleaned_data.get("profile_image")
+# Comment out for now - if user wants a blank field, let them have it!
+#             user_profile.first_name = form.cleaned_data.get("first_name", user_profile.first_name)
+#             user_profile.last_name = form.cleaned_data.get("last_name", user_profile.last_name)
+#             user_profile.occupation = form.cleaned_data.get("occupation", user_profile.occupation)
+#             user_profile.public_email = form.cleaned_data.get("public_email", user_profile.public_email)
+#             user_profile.profile_image = form.cleaned_data.get("profile_image", user_profile.profile_image)
+            logger.warning(f'PROFILE IMAGE FIELD RESULT: {form.cleaned_data.get("profile_image")}')
             user_profile.save()
             return redirect(f"../profile/{request.user.username}")
         messages.add_message(request, message="Form was not valid!", level="ERROR")
         return render(request, "users/edit_profile.html", context={"form": form})
-    form = forms.EditProfileForm()
+    # user_profile = models.UserProfile.objects.filter(id=request.user.id).first()
+    form = forms.EditProfileForm(instance=request.user.profile)
     return render(request, "users/edit_profile.html", context={"form": form})
 
 
